@@ -35,15 +35,14 @@ function generateStaticδ(rules)
 						end
 					end)
 	end
-	unbuiltExpressions
+	return Expr(:call, unbuiltExpressions...)
 end
 
 
 
 currentConfig = Configuration(1, 1, [0,0,0,0,0])
-delta = Dict((1,0)=>(2, 1, 1), (1,1)=>(2, 3, 1), (2,0)=>(1, 1, -1))
-exprs = generateStaticδ(delta)
-a = Expr(:call, exprs...)
+delta = Dict((1,0)=>(2, 1, 1), (1,1)=>(2, 3, 1), (2,0)=>(1, 1, 1))
+a = generateStaticδ(delta)
 dump(a)
 eval(a)
 dump(currentConfig)
